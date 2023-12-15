@@ -14,3 +14,6 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rewind.settings')
 
 application = get_wsgi_application()
+
+# this was done for vercel
+app = application
