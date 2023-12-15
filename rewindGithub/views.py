@@ -31,7 +31,7 @@ def get_username(access_token):
     response_json = response.json()
 
     if 'message' in response_json and response_json['message'] == 'Bad credentials':
-        return HttpResponseRedirect('/revoked/')
+        return HttpResponseRedirect('/')
 
     username = response_json.get('login')
     return username
