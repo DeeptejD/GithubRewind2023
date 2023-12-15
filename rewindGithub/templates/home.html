@@ -1,20 +1,45 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Home
+#GitHubWrapped2023
 {% endblock %}
 
 {% block content %}
-<div class="w-screen h-screen bg-gray-50 lg:px-96 px-11 lg:py-11 py-6 bg-gray-950 text-white">
-    <div class="flex flex-col space-y-5 justify-center items-center w-full h-full border-2 border-gray-800 rounded-2xl shadow-md shadow-gray-50 backdrop-blur-2xl">
-        <div class="text-3xl font-semibold text-center">
-            <h1>Welcome to GitHub Rewind!</h1>
-            <div class="text-xl font-normal">
-                <h2>Authenticate with your GitHub account to continue.</h2>
-            </div>
-        </div>
-        <a href="/authenticate"><button id="authenticateButton"
-                class="bg-gray-500 rounded-2xl shadow-2xl p-5 hover:bg-white transition-all duration-300 text-2xl font-semibold">Authenticate</button></a>
+<div class="min-w-screen min-h-screen overflow-y-none overflow-x-none bg-[#00000C] flex flex-col px-5">
+<!-- nav -->
+<div class="w-full h-14 flex flex-row justify-between items-center justify-center px-11 text-white">
+<div></div>
+<div>
+    stars
+</div>
+</div>
+
+<!-- body -->
+<div class="w-full flex-grow flex flex-col space-y-2 relative">
+    <div class="w-full h-fit text-3xl text-gray-50 flex p-5 items-center justify-center">
+        <span>#GitHubWrapped2023</span>
     </div>
+    <div class="text-6xl font-semibold text-center text-[#E8A7FF]">
+        2023 was <span class="block md:inline">AI-mazing! 👀</span>
+    </div>
+    <div class="w-full px-20 pt-5">
+        <div class="text-center font-light w-full lg:px-52 text-xl text-white">
+            Reflect on a year of coding achievements, celebrate your milestones and share your accomplishments with the
+            developer
+            community! 🎉
+        </div>
+        <div class="flex items-center justify-center pt-11">
+            <a href="/authenticate">
+                <button class="z-96 w-44 h-fit p-5 rounded-xl bg-[#E8A7FF] text-xl font-bold transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#4B0564] hover:shadow-500/50">
+                    Wrap it up!
+                </button>
+            </a>
+        </div>
+    </div>
+    <img src="https://ucarecdn.com/7341eb10-6348-4fb9-9eda-d1b9ddef3e83/trophy.png" alt="Github Trophy" class="absolute -bottom-11 left-1/2 transform -translate-x-1/2 z-10 transition-all duration-500 hover:scale-110 " style="height: 25rem; width: 25rem;">
+    <div class="absolute w-96 h-96 bg-opacity-70 rounded-full bg-[#571A73] blur-3xl -bottom-32 left-1/2 transform -translate-x-1/2">
+
+    </div>
+</div>
 </div>
 {% endblock %}

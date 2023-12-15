@@ -132,4 +132,4 @@ GITHUB_USER_URL = 'https://api.github.com/user'
 GITHUB_CLIENT_ID = config('GITHUB_CLIENT_ID')
 GITHUB_CLIENT_SECRET = config('GITHUB_CLIENT_SECRET')
 # GITHUB_CALLBACK_URL = 'http://localhost:8000/callback/'
-GITHUB_CALLBACK_URL = 'https://githubwrapped-deeptej.vercel.app/callback/'
+GITHUB_CALLBACK_URL = 'https://githubrewind.vercel.app/callback/'
