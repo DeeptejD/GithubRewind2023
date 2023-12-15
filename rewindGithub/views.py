@@ -66,3 +66,5 @@ def home_page(request):
 
 def revoked_view(request):
     return render(request, 'revoked.html')
+
+

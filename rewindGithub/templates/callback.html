@@ -5,8 +5,8 @@ GitHub Rewind
 {% endblock %}
 
 {% block content %}
-<div class="w-screen h-screen bg-gray-950">
-    <div class="flex flex-col space-y-5 justify-center items-center w-full h-full text-white text-3xl">
+<div class="w-screen h-screen bg-cover bg-center" style="background-image: url({{ avatar_url }});">
+    <div class="flex flex-col space-y-5 justify-center items-center w-full h-full text-white text-3xl backdrop-blur-3xl bg-opacity-40 bg-gray-950 ">
         <div>
             <a href="{{ profile_url }}">
                 <img src="{{ avatar_url }}" alt="Avatar" class="w-48 h-48 rounded-2xl border-2 border-gray-700">
