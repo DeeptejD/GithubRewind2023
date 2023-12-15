@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.conf import settings
 import requests
@@ -23,7 +23,7 @@ def get_access_token(code):
     access_token = response_json.get('access_token')
     return access_token
 
-def get_username(access_token):
+def get_user_info(access_token):
     user_url = settings.GITHUB_USER_URL
     headers = {'Authorization': f'token {access_token}'}
 
@@ -32,13 +32,12 @@ def get_username(access_token):
 
     if 'message' in response_json and response_json['message'] == 'Bad credentials':
         return HttpResponseRedirect('/')
-
-    username = response_json.get('login')
-    return username
+    
+    return {'user_name': response_json.get('login'), 'profile_url': response_json.get('html_url'), 'avatar_url': response_json.get('avatar_url')}
 
 def authenticate(request):
-    client_id = 'c33d10cbd027033fc046'
-    callback_url = 'http://localhost:8000/callback/'
+    client_id = settings.GITHUB_CLIENT_ID
+    callback_url = settings.GITHUB_CALLBACK_URL
     
     github_oauth_url = f'https://github.com/login/oauth/authorize?client_id={client_id}&redirect_uri={callback_url}'
     
@@ -47,16 +46,23 @@ def authenticate(request):
 def callback(request):
     code = request.GET.get('code')
     access_token = get_access_token(code)
-    username = get_username(access_token)
+    user_info = get_user_info(access_token)
 
-    if isinstance(username, HttpResponseRedirect):
-        return username
+    if user_info is not None:
+        if all(key in user_info for key in ['user_name', 'profile_url', 'avatar_url']):
+            # unpack
+            username = user_info['user_name']
+            profile_url = user_info['profile_url']
+            avatar_url = user_info['avatar_url']
 
-    return render(request, 'callback.html', {'username': username})
+            return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url})
+    else:
+        return redirect('authenticate')
+
+    return redirect('authenticate')
 
 def home_page(request):
     return render(request, 'home.html')
 
-# handling revoked user
 def revoked_view(request):
     return render(request, 'revoked.html')

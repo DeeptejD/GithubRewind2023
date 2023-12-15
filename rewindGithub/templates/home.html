@@ -5,10 +5,16 @@ Home
 {% endblock %}
 
 {% block content %}
-<div class="w-screen h-screen bg-gray-950">
-    <div class="flex flex-row justify-center items-center w-full h-full">
+<div class="w-screen h-screen bg-gray-50 px-96 py-11">
+    <div class="flex flex-col space-y-5 justify-center items-center w-full h-full border-2 border-gray-800 rounded-2xl">
+        <div class="text-3xl font-semibold text-center">
+            <h1>Welcome to GitHub Rewind!</h1>
+            <div class="text-xl font-normal">
+                <h2>Authenticate with your GitHub account to continue.</h2>
+            </div>
+        </div>
         <a href="/authenticate"><button id="authenticateButton"
-                class="bg-gray-500 rounded-2xl p-5 hover:bg-white transition-all duration-300">Authenticate</button></a>
+                class="bg-gray-500 rounded-2xl shadow-2xl p-5 hover:bg-white transition-all duration-300 text-2xl font-semibold">Authenticate</button></a>
     </div>
 </div>
 {% endblock %}

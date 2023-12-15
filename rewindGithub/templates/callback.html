@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Callback
+GitHub Rewind
 {% endblock %}
 
 {% block content %}
 <div class="w-screen h-screen bg-gray-950">
-    <div class="flex justify-center items-center w-full h-full text-white text-3xl">
+    <div class="flex flex-col space-y-5 justify-center items-center w-full h-full text-white text-3xl">
+        <div>
+            <a href="{{ profile_url }}">
+                <img src="{{ avatar_url }}" alt="Avatar" class="w-48 h-48 rounded-2xl border-2 border-gray-700">
+            </a>
+        </div>
+        <div>
             <h1>Welcome, {{ username }}!</h1>
+        </div>
     </div>
 </div>
 {% endblock %}
