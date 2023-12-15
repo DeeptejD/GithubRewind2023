@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-8sryo^hcgr08%px_i2v0ce8p!d@+=ppw6i+!5%o*+s(x+$pi0b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -132,4 +132,4 @@ GITHUB_USER_URL = 'https://api.github.com/user'
 GITHUB_CLIENT_ID = config('GITHUB_CLIENT_ID')
 GITHUB_CLIENT_SECRET = config('GITHUB_CLIENT_SECRET')
 # GITHUB_CALLBACK_URL = 'http://localhost:8000/callback/'
-GITHUB_CALLBACK_URL = 'https://githubwrapped-deeptej.vercel.app/callback'
+GITHUB_CALLBACK_URL = 'https://githubwrapped-deeptej.vercel.app/callback/'
