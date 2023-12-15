@@ -17,9 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from rewindGithub.views import home_page
+from rewindGithub.views import home_page, authenticate, callback, revoked_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page, name='home'),
+    path('authenticate/', authenticate, name='authenticate'),
+    path('callback/', callback, name='callback'),
+    path('revoked/', revoked_view, name='revoked')
 ]
