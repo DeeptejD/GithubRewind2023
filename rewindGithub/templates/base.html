@@ -12,21 +12,15 @@
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 
     <!-- fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
-
-    <style>
-        *{
-            font-family: 'Space Grotesk', sans-serif;
-        
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 
     <title>{% block title %}{% endblock %}</title>
 </head>
 
-<body class="overflow-y-hidden overflow-x-hidden">
+<body class="overflow-y-hidden overflow-x-hidden ">
     {% block content %}
     {% endblock %}
 </body>
