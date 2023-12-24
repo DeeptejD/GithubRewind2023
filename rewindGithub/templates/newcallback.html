@@ -84,7 +84,7 @@
         class="flex h-screen w-screen snap-y snap-mandatory flex-col overflow-y-auto overflow-x-hidden scroll-smooth bg-fixed">
         <!-- bottom button -->
         <button
-            class="flex-flex-row absolute bottom-0 h-20 w-screen items-center justify-center border-t-2 border-gray-900 bg-opacity-30 backdrop-blur-2xl z-50"
+            class="flex-flex-row absolute bottom-0 h-20 w-screen items-center justify-center border-t-2 border-gray-900 backdrop-blur-xl bg-gray-950 bg-opacity-10 z-50"
             id="next-button">
             <div class="flex h-full w-full items-center justify-center">
                 <i class="fa-solid fa-arrow-down fa-2xl text-gray-50" style="animation: arrow 1s infinite ease-in-out;"
@@ -211,11 +211,11 @@
         <!-- TOP LANGS -->
         <div class="snap-item flex min-h-full w-full snap-center items-center justify-center">
             <!-- desktop -->
-            <div class="relative mb-16 hidden h-full w-full flex-row items-center space-x-5 bg-gradient-to-br from-[#e7ffad] via-[#7bedff] to-[#d687f0]  px-32 py-36 xl:flex"
+            <div class="relative mb-16 hidden h-full w-full flex-row items-center space-x-5 bg-gray-950  px-32 py-36 xl:flex"
                 style="animation: move-gradient 5s linear infinite ease;">
                 <!-- message -->
                 <div
-                    class="z-20 flex h-5/6 w-2/3 flex-col justify-center space-y-10 rounded-2xl border-2 border-gray-700 bg-purple-500 bg-opacity-30 px-10 text-gray-950 shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:h-full hover:border-purple-700 hover:bg-purple-700 hover:bg-opacity-60 hover:text-gray-50">
+                    class="z-20 flex w-2/3 flex-col justify-center space-y-10 rounded-2xl border-2 border-gray-700 px-10 text-gray-950 shadow-2xl backdrop-blur-2xl transition-all duration-300 h-full hover:border-purple-700 bg-gradient-to-br from-[#e7ffad] via-[#7bedff] to-[#d687f0] bg-opacity-60" id="gradientCard">
                     <h1 class="text-4xl font-semibold transition-all duration-300">
                         You've clung to these 3 like a koala to a eucalyptus tree! 🐨
                     </h1>
@@ -226,8 +226,8 @@
                     <p class="text-xs font-light">
                         PS: HTML is still not a programming language
                     </p>
-                    <div
-                        class="flex w-fit flex-row items-start rounded-xl bg-purple-600 p-5 text-xl font-semibold shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:translate-x-1">
+                    <div class="flex w-fit flex-row items-start rounded-xl bg-purple-600 p-5 text-xl font-semibold shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:translate-x-1"
+                        >
                         <button class="">Share Badge</button>
                     </div>
                 </div>
@@ -381,7 +381,45 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll-polyfill/0.4.4/smoothscroll.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.2/tsparticles.confetti.bundle.min.js"></script>
     <script>
+
+        const duration = 15 * 1000;
+        animationEnd = Date.now() + duration;
+
+        let skew = 1;
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        (function frame() {
+            const timeLeft = animationEnd - Date.now(),
+                ticks = Math.max(200, 500 * (timeLeft / duration));
+
+            skew = Math.max(0.8, skew - 0.001);
+
+            confetti({
+                particleCount: 1,
+                startVelocity: 0,
+                ticks: ticks,
+                origin: {
+                    x: Math.random(),
+                    // since particles fall down, skew start toward the top
+                    y: Math.random() * skew - 0.2,
+                },
+                colors: ["#ffffff"],
+                shapes: ["circle"],
+                gravity: randomInRange(0.4, 0.6),
+                scalar: randomInRange(0.4, 1),
+                drift: randomInRange(-0.4, 0.4),
+            });
+
+            if (timeLeft > 0) {
+                requestAnimationFrame(frame);
+            }
+        })();
+
         const snapItems = document.querySelectorAll('.snap-item');
         const nextButton = document.getElementById('next-button');
 
@@ -394,10 +432,10 @@
             snapItems[nextIndex].classList.add('current-active');
             snapItems[nextIndex].style.scrollBehavior = 'smooth';
             snapItems[nextIndex].scrollIntoView();
-            down = document.getElementById('down-arrow');
+            element = document.getElementById('down-arrow');
 
             // classes to switch arrows
-                        if (index === snapItems.length - 1) {
+            if (nextIndex === snapItems.length - 1) {
                 if (!element.classList.contains('fa-arrow-up'))
                     element.classList.add('fa-arrow-up');
                 if (element.classList.contains('fa-arrow-down'))
@@ -411,26 +449,15 @@
             }
         }
 
-        function snapToPrevItem() {
-            const activeSnapItem = document.querySelector('.snap-item.current-active');
-            const activeIndex = Array.from(snapItems).indexOf(activeSnapItem);
-            const prevIndex = (activeIndex - 1) % snapItems.length;
-
-            activeSnapItem.classList.remove('current-active');
-            snapItems[prevIndex].classList.add('current-active');
-            snapItems[prevIndex].style.scrollBehavior = 'smooth';
-            snapItems[prevIndex].scrollIntoView();
-        }
-
         nextButton.addEventListener('click', snapToNextItem);
         document.addEventListener('keydown', (event) => {
             // triggers when i click the down button
             // up code is 38 down is 40
             if (event.keyCode === 40)
                 snapToNextItem();
-            else if(event.keyCode === 38)
-                snapToPrevItem();
         });
+
+
     </script>
 </body>
 
