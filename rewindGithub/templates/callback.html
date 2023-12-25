@@ -47,13 +47,13 @@
             class="snap-item current-active flex min-h-full w-full snap-center items-center justify-center bg-green-200">
             <!-- desktop -->
             <div class="relative mb-16 hidden h-full w-full flex-row items-center space-x-5 bg-cover bg-center px-32 py-36 xl:flex scroll-into-view"
-                id="heroDesktop" style="background-image: url(../static/images/pfp.png)">
+                id="heroDesktop" style="background-image: url({{ avatar_url }})">
                 <!-- that blur backdrop -->
                 <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full backdrop-blur-2xl"></div>
 
                 <!-- image -->
                 <div class=" child-element  child-element  h-full w-1/3 rounded-2xl border-2 border-gray-600 bg-gray-300 bg-cover bg-center shadow-2xl transition-all duration-500 hover:mr-5 hover:scale-105 hover:border-yellow-200"
-                    style="background-image: url(../static/images/pfp.png)"></div>
+                    style="background-image: url({{ avatar_url }})"></div>
 
                 <!-- greeting -->
                 <div
@@ -72,14 +72,14 @@
 
             <!-- mobile -->
             <div class="relative mb-12 flex h-full w-full flex-col items-center justify-center px-11 py-20 xl:hidden scroll-into-view scroll-into-view "
-                id="heroMobile" style="background-image: url(../static/images/pfp.png)">
+                id="heroMobile" style="background-image: url({{ avatar_url }})">
                 <!-- backdrop blur -->
                 <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full backdrop-blur-2xl"></div>
 
                 <!-- profile -->
                 <div
                     class=" child-element  z-20 mb-4 flex h-1/3 w-full items-center justify-center overflow-hidden rounded-2xl object-cover transition-all duration-300">
-                    <img src="../static/images/pfp.png"
+                    <img src="{{ avatar_url }}"
                         class="h-full max-h-80 min-h-11 min-w-11 max-w-80 rounded-2xl border-2 border-gray-600 shadow-2xl"
                         alt="Profile Picture" />
                 </div>
