@@ -360,26 +360,32 @@ function downloadStargazer() {
 }
 
 function shareTop3onTwitter() {
-    var tweetText = 'My Top 3 programming languages for 2023 are 👀 Find out yours on Github Rewind 2023 ✨ https://githubrewind.vercel.app ✨ #githubrewind #githubrewind2023';
+    var first = document.getElementById('first').getAttribute('alt');
+    var second = document.getElementById('second').getAttribute('alt');
+    var third = document.getElementById('third').getAttribute('alt');
+    var tweetText = 'My Top 3 programming languages for 2023 are ' + first + ', ' + second + ', ' + third + ' 👀 Find out yours on Github Rewind 2023 ✨ https://githubrewind.vercel.app ✨ #githubrewind #githubrewind2023';
     var twitterUrl = 'https://x.com/intent/tweet?url=' + '&text=' + encodeURIComponent(tweetText);
     window.open(twitterUrl, '_blank');
 }
 
 function shareStargazerOnTwitter() {
-    var tweetText = 'I got the Stargazer badge 🤩 on GitHub Rewind 2023! Check out your GitHub 2023 journey at https://githubrewind.vercel.app ✨ #githubrewind #githubrewind2023';
+    var stars = document.getElementById('starCount').innerText;
+    var tweetText = 'I recieved ' + stars + 'stars on my repos and got the Stargazer badge 🤩 on GitHub Rewind 2023! Check out your GitHub 2023 journey at https://githubrewind.vercel.app ✨ #githubrewind #githubrewind2023';
     var twitterUrl = 'https://x.com/intent/tweet?url=' + '&text=' + encodeURIComponent(tweetText);
     window.open(twitterUrl, '_blank');
 }
 
 function shareCommittedOnTwitter() {
-    var tweetText = 'I got the Committed badge 😎 on GitHub Rewind 2023! Check out your GitHub 2023 journey at https://githubrewind.vercel.app ✨ #githubrewind #githubrewind2023';
+    var commits = document.getElementById('commitCount').innerText;
+    var tweetText = 'I made a total of ' + commits + ' commits on GitHub and got the Committed badge 😎 on GitHub Rewind 2023! Check out your GitHub 2023 journey at https://githubrewind.vercel.app ✨ #githubrewind #githubrewind2023';
     var twitterUrl = 'https://x.com/intent/tweet?url=' + '&text=' + encodeURIComponent(tweetText);
     window.open(twitterUrl, '_blank');
 }
 
 function shareBirthOnTwitter() {
-    var days = "{{ totalDays }}";
-    var tweetText = 'Celebrating' + days + 'days on Github and the feeling of making progress a line of code at a time! 🔥 Check out your GitHub 2023 journey at https://githubrewind.vercel.app ✨ #githubrewind #githubrewind2023';
+    var daysElement = document.getElementById('totaldias');
+    var days = daysElement.textContent;
+    var tweetText = 'It\'s been' + days + 'days since I made my GitHub account! Pretty cool right? 🔥 Check out your GitHub 2023 journey at https://githubrewind.vercel.app ✨ #githubrewind #githubrewind2023';
     var twitterUrl = 'https://x.com/intent/tweet?url=' + '&text=' + encodeURIComponent(tweetText);
     window.open(twitterUrl, '_blank');
 }

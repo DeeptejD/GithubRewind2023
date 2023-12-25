@@ -157,7 +157,7 @@
                 <div
                     class=" child-element  delay-1 z-20 flex h-2/3 w-full flex-grow flex-col justify-center rounded-2xl border-2 border-green-700 bg-green-700 bg-opacity-30 px-11 py-6 text-gray-950 shadow-2xl backdrop-blur-2xl transition-all duration-300">
                     <h1 class="mb-3 text-lg font-bold sm:text-3xl lg:text-5xl">
-                        In 2023 you've unleashed {{ total_commits }} commits into the wild! 🌿
+                        In 2023 you've unleashed <span class="commitCount">{{ total_commits }}</span> commits into the wild! 🌿
                     </h1>
                     <p class="mb-5 text-sm font-light sm:text-xl lg:text-3xl">
                         That's more code than a caffeinated squirrel on rollerblades. Keep
@@ -228,14 +228,14 @@
                     class=" child-element  rounded-2x z-20 mb-4 flex h-1/2 w-full items-center justify-center overflow-hidden object-cover transition-all duration-300 lg:px-24">
                     <div class="ml-4 grid h-full w-full grid-cols-3 grid-rows-4 gap-2">
                         <!-- silver bar -->
-                        <div class="col-span-1 col-start-1 row-span-1 row-start-2 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.1.0|lower }}/{{ top_langs.1.0|lower }}-original.svg" class="w-20 h-20 items-center" alt="{{ top_langs.1.0 }}" /></div>
+                        <div class="col-span-1 col-start-1 row-span-1 row-start-2 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.1.0|lower }}/{{ top_langs.1.0|lower }}-original.svg" class="w-20 h-20 items-center" alt="{{ top_langs.1.0 }}" id="second" /></div>
                         <div class="to col-span-1 row-span-2 row-start-3 rounded-2xl border-2 border-gray-600 bg-gray-600 bg-gradient-to-b from-gray-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-gray-500" id="silverMobile"></div>
                         <!-- golden bar -->
-                        <div class="col-span-1 col-start-2 row-span-1 row-start-1 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.0.0|lower }}/{{ top_langs.0.0|lower }}-original.svg" class="w-20 h-20 items-center" alt="{{ top_langs.0.0 }}" /></div>
+                        <div class="col-span-1 col-start-2 row-span-1 row-start-1 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.0.0|lower }}/{{ top_langs.0.0|lower }}-original.svg" class="w-20 h-20 items-center" alt="{{ top_langs.0.0 }}" id="first" /></div>
                         <div class="to col-span-1 row-span-3 row-start-2 rounded-2xl border-2 border-yellow-400 bg-yellow-600 bg-gradient-to-b from-yellow-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-yellow-300" id="goldMobile"></div>
 
                         <!-- bronzer bar -->
-                        <div class="col-span-1 col-start-3 row-span-1 row-start-3 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.2.0|lower }}/{{ top_langs.2.0|lower }}-original.svg" class="w-20 h-20 items-center" alt="{{ top_langs.2.0 }}" /></div>
+                        <div class="col-span-1 col-start-3 row-span-1 row-start-3 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.2.0|lower }}/{{ top_langs.2.0|lower }}-original.svg" class="w-20 h-20 items-center" alt="{{ top_langs.2.0 }}" id="third" /></div>
                         <div class="to col-span-1 row-span-1 row-start-4 rounded-2xl border-2 border-amber-600 bg-amber-800 bg-gradient-to-b from-amber-600 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-amber-600" id="bronzeMobile"></div>
                     </div>
                 </div>
@@ -268,7 +268,7 @@
                 <div
                     class=" child-element  z-20 flex h-4/5 w-2/3 flex-col justify-center space-y-10 rounded-2xl border-2 border-white bg-gray-100 bg-opacity-10 px-10 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:h-full hover:border-yellow-100 hover:bg-gray-900 hover:bg-opacity-60 hover:text-gray-50">
                     <h1 class="text-4xl font-semibold transition-all duration-300">
-                        You recieved {{ starred_repos_count}} stars on your repos in 2023 ✨✨
+                        You recieved <span id="starCount">{{ starred_repos_count}}</span> stars on your repos in 2023 ✨✨
                     </h1>
                     <p class="mb-10 text-xl font-light transition-all duration-300">
                         Can't wait to see the constellation you build next year! 🤩
@@ -340,7 +340,7 @@
                 <div
                     class=" child-element  z-20 flex h-4/5 w-2/3 flex-col justify-center space-y-10 rounded-2xl border-2 border-white bg-gray-100 bg-opacity-10 px-10 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:h-full hover:border-yellow-100 hover:bg-gray-900 hover:bg-opacity-60 hover:text-gray-50">
                     <h1 class="text-4xl font-semibold transition-all duration-300">
-                        Fork Yeah! Celebrating {{ totalDays }} Days of Code (and Probably Some Bugs) 👀
+                        Fork Yeah! Celebrating <span id="totaldias">{{ totalDays }}</span> Days of Code (and Probably Some Bugs) 👀
                     </h1>
                     <p class="mb-10 text-xl font-light transition-all duration-300">
                         You created your account on {{ createdDate }}, was your first code 'Hello World' too? 👀
@@ -404,7 +404,7 @@
                         And thats a wrap! 🥹
                     </h1>
                     <p class="mb-10 text-xl font-light transition-all duration-300">
-                        We shall meet again, with yet another Rewind in 2024! Till then keep coding! 💪
+                        We shall meet again, with yet another Rewind in 2024! Till then keep coding & keep building cool stuff! 💪
                     </p>
                     <div class="flex flex-row space-x-2">
                         <div
@@ -437,17 +437,12 @@
                 <div
                     class=" child-element  delay-1 z-20 flex h-2/3 w-full flex-grow flex-col justify-center rounded-2xl border-2 border-yellow-100 bg-gray-800 bg-opacity-10 px-11 py-6 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300">
                     <h1 class="mb-3 text-lg font-bold sm:text-3xl lg:text-5xl">
-                        Fork Yeah! Celebrating [X] Days of Code (and Probably Some Bugs) 👀
+                        And thats a wrap! 🥹
                     </h1>
                     <p class="mb-5 text-sm font-light sm:text-xl lg:text-3xl">
-                        Did you start with 'Hello World' too? 👀
+                        We shall meet again, with yet another Rewind in 2024! Till then keep coding & keep building cool stuff! 💪
                     </p>
                     <div class="flex flex-row space-x-2 items-center justify-center">
-                        <!-- <div
-                                            class="flex w-fit space-x-3 flex-row items-start rounded-xl  p-5 text-xl font-semibold text-gray-50 transition-all duration-300">
-                                            <button title="Download and Flex on them fellow Devs" onclick="downloadStargazer()"><i
-                                                    class="fa-solid fa-circle-down"></i></button>
-                                        </div> -->
                         <div
                             class="flex w-fit space-x-3 flex-row items-start rounded-xl border-2 p-5 text-xl font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:translate-x-1 hover:shadow-2xl">
                             <button class="" title="'Twitter will always remain Twitter!'"
@@ -493,10 +488,10 @@
             <div class=" scroll-into-view relative mb-12 flex h-full w-full flex-col items-center justify-center bg-gray-950 bg-cover bg-center px-11 py-20 xl:hidden"
                 id="finalMobile">
                 <!-- badge -->
-                <div class=" child-element  rounded-2x z-20 mb-4 flex h-1/3 w-full items-center justify-center overflow-hidden object-cover transition-all duration-300 confetti-badge"
+                <!-- <div class=" child-element  rounded-2x z-20 mb-4 flex h-1/3 w-full items-center justify-center overflow-hidden object-cover transition-all duration-300 confetti-badge"
                     id="confetti-badge4">
                     <iframe src="https://github.com/sponsors/DeeptejD/card" title="Sponsor DeeptejD" height="225" width="600" style="border: 0;" style="animation: teeter 1.5s ease-in-out infinite"></iframe>
-                </div>
+                </div> -->
                 <div
                     class=" child-element  delay-1 z-20 flex h-2/3 w-full flex-grow flex-col justify-center rounded-2xl border-2 border-yellow-100 bg-gray-800 bg-opacity-10 px-11 py-6 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300">
                     <h1 class="mb-3 text-lg font-bold sm:text-3xl lg:text-5xl text-center">
@@ -520,7 +515,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.2/tsparticles.confetti.bundle.min.js"></script>
-    <script src="https://res.cloudinary.com/de5vfgkg4/raw/upload/v1703513967/app_yzgvhc.js"></script>
+    <script src="https://res.cloudinary.com/de5vfgkg4/raw/upload/v1703532568/app_loj5x5.js"></script>
 </body>
 
 </html>
