@@ -7,7 +7,54 @@ from datetime import datetime, timedelta, date
 # environment variables
 from django.conf import settings
 
-# takes code as a par and returns the access token
+# called for URL /authenticate
+def authenticate(request):
+    client_id = settings.GITHUB_CLIENT_ID
+    callback_url = settings.GITHUB_CALLBACK_URL
+    
+    github_oauth_url = f'https://github.com/login/oauth/authorize?client_id={client_id}&redirect_uri={callback_url}'
+    
+    # this makes a request using the client ID to the github oauth url
+    return HttpResponseRedirect(github_oauth_url)
+
+# called for URL /callback this is the one that returns the actual stuff that gets displayed on the callback template
+def callback(request):
+    # code form callback
+    code = request.GET.get('code')
+    # exchanged for access token
+    access_token = get_access_token(code)
+
+    # get total commits
+    total_commits = get_total_commits(access_token)
+
+    # get starred repos count
+    starred_repos_count = get_total_stars(access_token)
+
+    # que dias 
+    total_days, created_date = get_account_age(access_token)
+
+    # get user info
+    user_info = get_user_info(access_token)
+
+    if user_info is not None:
+        if all(key in user_info for key in ['user_name', 'profile_url', 'avatar_url']):
+            # unpack
+            username = user_info['user_name']
+            profile_url = user_info['profile_url']
+            avatar_url = user_info['avatar_url']
+
+            # get user repos
+            repos = get_user_repos(access_token)
+            if repos is not None:
+                top_langs = get_top_langs(repos, access_token)
+                return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url, 'repos': repos, 'top_langs': top_langs, 'total_commits': total_commits, 'starred': starred_repos_count, 'totalDays': total_days, 'createdDate': created_date })
+            else:
+                return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url, 'total_commits': total_commits, 'starred': starred_repos_count, 'totalDays': total_days, 'createdDate': created_date})
+    else:
+        return redirect('authenticate')
+
+    return redirect('authenticate')
+
 def get_access_token(code):
     access_token_url = settings.GITHUB_ACCESS_TOKEN_URL
     headers = {
@@ -41,58 +88,6 @@ def get_user_info(access_token):
     
     # return a dictionary of user info
     return {'user_name': response_json.get('login'), 'profile_url': response_json.get('html_url'), 'avatar_url': response_json.get('avatar_url')}
-
-def authenticate(request):
-    client_id = settings.GITHUB_CLIENT_ID
-    callback_url = settings.GITHUB_CALLBACK_URL
-    
-    github_oauth_url = f'https://github.com/login/oauth/authorize?client_id={client_id}&redirect_uri={callback_url}'
-    
-    # this makes a request using the client ID to the github oauth url
-    return HttpResponseRedirect(github_oauth_url)
-
-def callback(request):
-    # this code is used to exchange with an access token
-    code = request.GET.get('code')
-    access_token = get_access_token(code)
-
-    # get total commits
-    total_commits = get_total_commits(access_token)
-
-    # get starred repos count
-    starred_repos_count = get_starred_repos_count(access_token)
-
-    total_days, created_date = get_twitter_account_info(access_token)
-
-    # get user info
-    user_info = get_user_info(access_token)
-
-    if user_info is not None:
-        if all(key in user_info for key in ['user_name', 'profile_url', 'avatar_url']):
-            # unpack
-            username = user_info['user_name']
-            profile_url = user_info['profile_url']
-            avatar_url = user_info['avatar_url']
-
-            # get user repos
-            repos = get_user_repos(access_token)
-            if repos is not None:
-                top_langs = get_top_langs(repos, access_token)
-                return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url, 'repos': repos, 'top_langs': top_langs, 'total_commits': total_commits, 'starred': starred_repos_count, 'totalDays': total_days, 'createdDate': created_date })
-            else:
-                return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url, 'total_commits': total_commits, 'starred': starred_repos_count, 'totalDays': total_days, 'createdDate': created_date})
-    else:
-        return redirect('authenticate')
-
-    return redirect('authenticate')
-
-# renders the home page
-def home_page(request):
-    return render(request, 'home.html')
-
-# renders the revoked user page
-def revoked_view(request):
-    return render(request, 'revoked.html')
 
 # to get the users repo info
 def get_user_repos(access_token):
@@ -189,59 +184,71 @@ def purify(l):
     else:
         return l
 
-def get_starred_repos_count(access_token):
-    url = f"https://api.github.com/user/starred?access_token={access_token}"
-    response = requests.get(url)
-    starred_repos = response.json()
-    starred_repos_count = len(starred_repos)
+def get_total_commits(access_token):
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+    }
+    response = requests.get('https://api.github.com/user', headers=headers)
+    if(response.status_code==200):
+        user_data = response.json()
+        if 'login' in user_data:
+            username = user_data['login']
+            one_year_ago = datetime.now() - timedelta(days=365)
+            since = one_year_ago.isoformat()
+            commits_url = f'https://api.github.com/users/{username}/events?since={since}'
+            commits_response = requests.get(commits_url, headers=headers)
+            if(commits_response.status_code==200):
+                commits_data = commits_response.json()
+                total_commits = 0
+                for event in commits_data:
+                    if event['type'] == 'PushEvent':
+                        total_commits += len(event['payload']['commits'])
+                return total_commits
+    return 0
 
-    return starred_repos_count
+def get_total_stars(access_token):
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+    }
+    response = requests.get('https://api.github.com/user', headers=headers)
+    if(response.status_code==200):
+        user_data = response.json()
+        if 'login' in user_data:
+            username = user_data['login']
+            repos_url = user_data['repos_url']
+            repos_response = requests.get(repos_url, headers=headers)
+            if(repos_response.status_code==200):
+                repos_data = repos_response.json()
+                total_stars = 0
+                one_year_ago = datetime.now() - timedelta(days=365)
+                since = one_year_ago.isoformat()
+                for repo in repos_data:
+                    stars_url = repo['url'] + '/stargazers'
+                    stars_response = requests.get(stars_url, headers=headers, params={'since': since})
+                    if(stars_response.status_code==200):
+                        stars_data = stars_response.json()
+                        total_stars += len(stars_data)
+                return total_stars
+    return 0
 
-def get_twitter_account_info(access_token):
-    url = f"https://api.github.com/user?access_token={access_token}"
-    response = requests.get(url)
-    user_info = response.json()
-
-    twitter_username = user_info.get("twitter_username")
-
-    if twitter_username:
-        twitter_url = f"https://api.twitter.com/1.1/users/show.json?screen_name={twitter_username}"
-        twitter_response = requests.get(twitter_url)
-        twitter_info = twitter_response.json()
-
-        created_at = twitter_info.get("created_at")
-
-        if created_at:
-            created_date = datetime.strptime(created_at, "%a %b %d %H:%M:%S %z %Y").date()
-            current_date = datetime.now().date()
-            total_days = (current_date - created_date).days
-
-            return total_days, created_date
-
+def get_account_age(access_token):
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+    }
+    response = requests.get('https://api.github.com/user', headers=headers)
+    if(response.status_code==200):
+        user_data = response.json()
+        if 'created_at' in user_data:
+            created_at = datetime.strptime(user_data['created_at'], '%Y-%m-%dT%H:%M:%SZ')
+            current_date = datetime.now()
+            account_age = (current_date - created_at).days
+            return account_age, created_at.date()
     return None, None
 
-def get_total_commits(access_token):
-    current_date = date.today()
-    one_year_ago = current_date - timedelta(days=365)
+# renders the home page
+def home_page(request):
+    return render(request, 'home.html')
 
-    current_date_str = current_date.strftime("%Y-%m-%d")
-    one_year_ago_str = one_year_ago.strftime("%Y-%m-%d")
-
-    url = f"https://api.github.com/user/repos?per_page=100&sort=created&direction=desc&access_token={access_token}"
-    response = requests.get(url)
-    repos = response.json()
-
-    total_commits = 0
-
-    for repo in repos:
-        repo_name = repo.get("name")
-        repo_url = repo.get("url")
-
-        if repo_name and repo_url:
-            commits_url = f"{repo_url}/commits?since={one_year_ago_str}&until={current_date_str}&access_token={access_token}"
-            commits_response = requests.get(commits_url)
-            commits = commits_response.json()
-
-            total_commits += len(commits)
-
-    return total_commits
+# renders the revoked user page
+def revoked_view(request):
+    return render(request, 'revoked.html')
