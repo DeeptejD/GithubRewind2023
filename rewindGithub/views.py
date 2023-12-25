@@ -202,15 +202,18 @@ def get_total_commits(access_token):
 
     total_commits = 0
 
-    for repo in repos:
-        repo_name = repo["name"]
-        repo_url = repo["url"]
+    if isinstance(repos, list):
+        for repo in repos:
+            if isinstance(repo, dict):
+                repo_name = repo.get("name")
+                repo_url = repo.get("url")
 
-        commits_url = f"{repo_url}/commits?since={one_year_ago_str}&until={current_date_str}&access_token={access_token}"
-        commits_response = requests.get(commits_url)
-        commits = commits_response.json()
+                if repo_name and repo_url:
+                    commits_url = f"{repo_url}/commits?since={one_year_ago_str}&until={current_date_str}&access_token={access_token}"
+                    commits_response = requests.get(commits_url)
+                    commits = commits_response.json()
 
-        total_commits += len(commits)
+                    total_commits += len(commits)
 
     return total_commits
 
