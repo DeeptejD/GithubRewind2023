@@ -56,6 +56,14 @@ def callback(request):
     code = request.GET.get('code')
     access_token = get_access_token(code)
 
+    # get total commits
+    total_commits = get_total_commits(access_token)
+
+    # get starred repos count
+    starred_repos_count = get_starred_repos_count(access_token)
+
+    total_days, created_date = get_twitter_account_info(access_token)
+
     # get user info
     user_info = get_user_info(access_token)
 
@@ -65,14 +73,6 @@ def callback(request):
             username = user_info['user_name']
             profile_url = user_info['profile_url']
             avatar_url = user_info['avatar_url']
-
-            # get total commits
-            total_commits = get_total_commits(access_token)
-
-            # get starred repos count
-            starred_repos_count = get_starred_repos_count(access_token)
-
-            total_days, created_date = get_twitter_account_info(access_token)
 
             # get user repos
             repos = get_user_repos(access_token)
@@ -188,34 +188,6 @@ def purify(l):
         return l
     else:
         return l
-    
-def get_total_commits(access_token):
-    current_date = date.today()
-    one_year_ago = current_date - timedelta(days=365)
-
-    current_date_str = current_date.strftime("%Y-%m-%d")
-    one_year_ago_str = one_year_ago.strftime("%Y-%m-%d")
-
-    url = f"https://api.github.com/user/repos?per_page=100&sort=created&direction=desc&access_token={access_token}"
-    response = requests.get(url)
-    repos = response.json()
-
-    total_commits = 0
-
-    if isinstance(repos, list):
-        for repo in repos:
-            if isinstance(repo, dict):
-                repo_name = repo.get("name")
-                repo_url = repo.get("url")
-
-                if repo_name and repo_url:
-                    commits_url = f"{repo_url}/commits?since={one_year_ago_str}&until={current_date_str}&access_token={access_token}"
-                    commits_response = requests.get(commits_url)
-                    commits = commits_response.json()
-
-                    total_commits += len(commits)
-
-    return total_commits
 
 def get_starred_repos_count(access_token):
     url = f"https://api.github.com/user/starred?access_token={access_token}"
@@ -247,3 +219,29 @@ def get_twitter_account_info(access_token):
             return total_days, created_date
 
     return None, None
+
+def get_total_commits(access_token):
+    current_date = date.today()
+    one_year_ago = current_date - timedelta(days=365)
+
+    current_date_str = current_date.strftime("%Y-%m-%d")
+    one_year_ago_str = one_year_ago.strftime("%Y-%m-%d")
+
+    url = f"https://api.github.com/user/repos?per_page=100&sort=created&direction=desc&access_token={access_token}"
+    response = requests.get(url)
+    repos = response.json()
+
+    total_commits = 0
+
+    for repo in repos:
+        repo_name = repo.get("name")
+        repo_url = repo.get("url")
+
+        if repo_name and repo_url:
+            commits_url = f"{repo_url}/commits?since={one_year_ago_str}&until={current_date_str}&access_token={access_token}"
+            commits_response = requests.get(commits_url)
+            commits = commits_response.json()
+
+            total_commits += len(commits)
+
+    return total_commits
