@@ -113,7 +113,7 @@
                 <div
                     class="child-element flex h-4/5 w-2/3 flex-col justify-center space-y-10 rounded-2xl border-2 border-gray-700 bg-green-700 bg-opacity-30 px-10 text-gray-950 shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:h-full hover:border-green-700 hover:bg-green-700 hover:bg-opacity-60 hover:text-gray-50">
                     <h1 class="text-4xl font-semibold transition-all duration-300">
-                        In 2023 you've unleashed 30 commits into the wild! 🌿
+                        In 2023 you've unleashed {{ total_commits }} commits into the wild! 🌿
                     </h1>
                     <p class="mb-10 text-xl font-light transition-all duration-300">
                         That's more code than a caffeinated squirrel on rollerblades. Keep
@@ -157,7 +157,7 @@
                 <div
                     class=" child-element  delay-1 z-20 flex h-2/3 w-full flex-grow flex-col justify-center rounded-2xl border-2 border-green-700 bg-green-700 bg-opacity-30 px-11 py-6 text-gray-950 shadow-2xl backdrop-blur-2xl transition-all duration-300">
                     <h1 class="mb-3 text-lg font-bold sm:text-3xl lg:text-5xl">
-                        In 2023 you've unleashed 30 commits into the wild! 🌿
+                        In 2023 you've unleashed {{ total_commits }} commits into the wild! 🌿
                     </h1>
                     <p class="mb-5 text-sm font-light sm:text-xl lg:text-3xl">
                         That's more code than a caffeinated squirrel on rollerblades. Keep
@@ -205,11 +205,21 @@
                 <div
                     class=" child-element  delay-1 z-20 flex h-4/5 w-1/3 items-center justify-center rounded-2xl transition-all duration-500">
                     <div class="ml-4 grid h-full w-full grid-cols-3 grid-rows-4 gap-2">
+                        <div class="col-span-1 col-start-1 row-span-1 row-start-2 rounded-lg flex items-center justify-center"><img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.1.0|lower }}/{{ top_langs.1.0|lower }}-original.svg"
+            class="w-28 h-28 items-center" alt="{{ top_langs.1.0 }}" /></div>
                         <div class="to col-span-1 row-span-2 row-start-3 cursor-pointer rounded-2xl border-2 border-gray-600 bg-gray-600 bg-gradient-to-b from-gray-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-gray-500"
                             id="silverDesktop">
                         </div>
+                        <div class="col-span-1 col-start-2 row-span-1 row-start-1 rounded-lg flex items-center justify-center"><img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.0.0|lower }}/{{ top_langs.0.0|lower }}-original.svg"
+            class="w-28 h-28 items-center" alt="{{ top_langs.0.0 }}" /></div>
                         <div class="to col-span-1 row-span-3 row-start-2 cursor-pointer rounded-2xl border-2 border-yellow-400 bg-yellow-600 bg-gradient-to-b from-yellow-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-yellow-300"
                             id="goldDesktop" style="animation: first 2s forwards"></div>
+
+                            <div class="col-span-1 col-start-3 row-span-1 row-start-3 rounded-lg flex items-center justify-center"><img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.2.0|lower }}/{{ top_langs.2.0|lower }}-original.svg"
+            class="w-28 h-28 items-center" alt="{{ top_langs.2.0 }}" />
                         <div class="to col-span-1 row-span-1 row-start-4 cursor-pointer rounded-2xl border-2 border-amber-600 bg-amber-800 bg-gradient-to-b from-amber-600 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-amber-600"
                             id="bronzeDesktop" -950 rounded-2xl></div>
                     </div>
@@ -261,7 +271,7 @@
                 <div
                     class=" child-element  z-20 flex h-4/5 w-2/3 flex-col justify-center space-y-10 rounded-2xl border-2 border-white bg-gray-100 bg-opacity-10 px-10 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:h-full hover:border-yellow-100 hover:bg-gray-900 hover:bg-opacity-60 hover:text-gray-50">
                     <h1 class="text-4xl font-semibold transition-all duration-300">
-                        You've sprinkled stardust over 30 repositories in 2023 ✨✨
+                        You've sprinkled stardust over {{ starred_repos_count}} repositories in 2023 ✨✨
                     </h1>
                     <p class="mb-10 text-xl font-light transition-all duration-300">
                         You are quite the stargazer 🤩
@@ -302,11 +312,10 @@
                 <div
                     class=" child-element  delay-1 z-20 flex h-2/3 w-full flex-grow flex-col justify-center rounded-2xl border-2 border-yellow-100 bg-gray-800 bg-opacity-10 px-11 py-6 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300">
                     <h1 class="mb-3 text-lg font-bold sm:text-3xl lg:text-5xl">
-                        In 2023 you've unleashed 30 commits into the wild! 🌿
+                        You've sprinkled stardust over {{ starred_repos_count}} repositories in 2023 ✨✨
                     </h1>
                     <p class="mb-5 text-sm font-light sm:text-xl lg:text-3xl">
-                        That's more code than a caffeinated squirrel on rollerblades. Keep
-                        the wheels turning! 💪
+                        You are quite the stargazer 🤩
                     </p>
                     <div class="flex flex-row space-x-2 items-center justify-center">
                         <div
@@ -334,10 +343,10 @@
                 <div
                     class=" child-element  z-20 flex h-4/5 w-2/3 flex-col justify-center space-y-10 rounded-2xl border-2 border-white bg-gray-100 bg-opacity-10 px-10 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:h-full hover:border-yellow-100 hover:bg-gray-900 hover:bg-opacity-60 hover:text-gray-50">
                     <h1 class="text-4xl font-semibold transition-all duration-300">
-                        Fork Yeah! Celebrating [X] Days of Code (and Probably Some Bugs) 👀
+                        Fork Yeah! Celebrating {{ totalDays }} Days of Code (and Probably Some Bugs) 👀
                     </h1>
                     <p class="mb-10 text-xl font-light transition-all duration-300">
-                        Did you start with 'Hello World' too? 👀
+                        You created your account on {{ createdDate }}, was your first code 'Hello World' too? 👀
                     </p>
                     <div class="flex flex-row space-x-2">
                         <div
@@ -370,10 +379,10 @@
                 <div
                     class=" child-element  delay-1 z-20 flex h-2/3 w-full flex-grow flex-col justify-center rounded-2xl border-2 border-yellow-100 bg-gray-800 bg-opacity-10 px-11 py-6 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300">
                     <h1 class="mb-3 text-lg font-bold sm:text-3xl lg:text-5xl">
-                        Fork Yeah! Celebrating [X] Days of Code (and Probably Some Bugs) 👀
+                        Fork Yeah! Celebrating {{ totalDays }} Days of Code (and Probably Some Bugs) 👀
                     </h1>
                     <p class="mb-5 text-sm font-light sm:text-xl lg:text-3xl">
-                        Did you start with 'Hello World' too? 👀
+                        You created your account on {{ createdDate }}, was your first code 'Hello World' too? 👀
                     </p>
                     <div class="flex flex-row space-x-2 items-center justify-center">
                         <div

@@ -378,7 +378,8 @@ function shareCommittedOnTwitter() {
 }
 
 function shareBirthOnTwitter() {
-    var tweetText = 'Celebrating X days on Github and the feeling of making progress a line of code at a time! 🔥 Check out your GitHub 2023 journey at https://githubrewind.vercel.app ✨ #githubrewind #githubrewind2023';
+    var days = "{{ totalDays }}";
+    var tweetText = 'Celebrating' + days + 'days on Github and the feeling of making progress a line of code at a time! 🔥 Check out your GitHub 2023 journey at https://githubrewind.vercel.app ✨ #githubrewind #githubrewind2023';
     var twitterUrl = 'https://x.com/intent/tweet?url=' + '&text=' + encodeURIComponent(tweetText);
     window.open(twitterUrl, '_blank');
 }

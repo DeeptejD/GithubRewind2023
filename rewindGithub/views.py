@@ -66,13 +66,21 @@ def callback(request):
             profile_url = user_info['profile_url']
             avatar_url = user_info['avatar_url']
 
+            # get total commits
+            total_commits = get_total_commits(access_token)
+
+            # get starred repos count
+            starred_repos_count = get_starred_repos_count(access_token)
+
+            total_days, created_date = get_twitter_account_info(access_token)
+
             # get user repos
             repos = get_user_repos(access_token)
             if repos is not None:
                 top_langs = get_top_langs(repos, access_token)
-                return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url, 'repos': repos, 'top_langs': top_langs})
+                return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url, 'repos': repos, 'top_langs': top_langs, 'total_commits': total_commits, 'starred': starred_repos_count, 'totalDays': total_days, 'createdDate': created_date })
             else:
-                return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url})
+                return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url, 'total_commits': total_commits, 'starred': starred_repos_count, 'totalDays': total_days, 'createdDate': created_date})
     else:
         return redirect('authenticate')
 
@@ -180,3 +188,59 @@ def purify(l):
         return l
     else:
         return l
+    
+def get_total_commits(access_token):
+    current_date = datetime.datetime.now().date()
+    one_year_ago = current_date - datetime.timedelta(days=365)
+
+    current_date_str = current_date.strftime("%Y-%m-%d")
+    one_year_ago_str = one_year_ago.strftime("%Y-%m-%d")
+
+    url = f"https://api.github.com/user/repos?per_page=100&sort=created&direction=desc&access_token={access_token}"
+    response = requests.get(url)
+    repos = response.json()
+
+    total_commits = 0
+
+    for repo in repos:
+        repo_name = repo["name"]
+        repo_url = repo["url"]
+
+        commits_url = f"{repo_url}/commits?since={one_year_ago_str}&until={current_date_str}&access_token={access_token}"
+        commits_response = requests.get(commits_url)
+        commits = commits_response.json()
+
+        total_commits += len(commits)
+
+    return total_commits
+
+def get_starred_repos_count(access_token):
+    url = f"https://api.github.com/user/starred?access_token={access_token}"
+    response = requests.get(url)
+    starred_repos = response.json()
+    starred_repos_count = len(starred_repos)
+
+    return starred_repos_count
+
+def get_twitter_account_info(access_token):
+    url = f"https://api.github.com/user?access_token={access_token}"
+    response = requests.get(url)
+    user_info = response.json()
+
+    twitter_username = user_info.get("twitter_username")
+
+    if twitter_username:
+        twitter_url = f"https://api.twitter.com/1.1/users/show.json?screen_name={twitter_username}"
+        twitter_response = requests.get(twitter_url)
+        twitter_info = twitter_response.json()
+
+        created_at = twitter_info.get("created_at")
+
+        if created_at:
+            created_date = datetime.strptime(created_at, "%a %b %d %H:%M:%S %z %Y").date()
+            current_date = datetime.now().date()
+            total_days = (current_date - created_date).days
+
+            return total_days, created_date
+
+    return None, None
