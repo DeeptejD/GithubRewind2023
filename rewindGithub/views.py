@@ -45,11 +45,9 @@ def callback(request):
 
             # get user repos
             repos = get_user_repos(access_token)
-            if repos is not None:
-                top_langs = get_top_langs(repos, access_token)
-                return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url, 'repos': repos, 'top_langs': top_langs, 'total_commits': total_commits, 'starred': starred_repos_count, 'totalDays': total_days, 'createdDate': created_date })
-            else:
-                return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url, 'total_commits': total_commits, 'starred': starred_repos_count, 'totalDays': total_days, 'createdDate': created_date})
+            top_langs = get_top_langs(repos, access_token)
+            print(top_langs)
+            return render(request, 'callback.html', {'username': username, 'profile_url': profile_url, 'avatar_url': avatar_url, 'repos': repos, 'top_langs': top_langs, 'total_commits': total_commits, 'starred': starred_repos_count, 'totalDays': total_days, 'createdDate': created_date })
     else:
         return redirect('authenticate')
 
