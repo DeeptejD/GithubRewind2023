@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.conf import settings
 import requests, json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 # environment variables
 from django.conf import settings
@@ -190,8 +190,8 @@ def purify(l):
         return l
     
 def get_total_commits(access_token):
-    current_date = datetime.datetime.now().date()
-    one_year_ago = current_date - datetime.timedelta(days=365)
+    current_date = date.today()
+    one_year_ago = current_date - timedelta(days=365)
 
     current_date_str = current_date.strftime("%Y-%m-%d")
     one_year_ago_str = one_year_ago.strftime("%Y-%m-%d")
