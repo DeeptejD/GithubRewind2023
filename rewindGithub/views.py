@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.conf import settings
-import requests, json, datetime
+import requests, json
 from datetime import datetime, timedelta
 
 # environment variables
