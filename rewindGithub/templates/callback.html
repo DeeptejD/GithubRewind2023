@@ -5,15 +5,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>#GitHubRewind2023</title>
-        <meta property="og:type" content="Web Application">
+    <meta property="og:type" content="Web Application">
     <meta property="og:title" content="GitHub Rewind 2023">
     <meta property="og:description" content="Look back at your GitHub journey through 2023 #githubrewind2023">
-    <meta property="twitter:image" content="https://res.cloudinary.com/de5vfgkg4/image/upload/v1703534955/OG_Twitter_uvmjyr.png">
+    <meta property="twitter:image"
+        content="https://res.cloudinary.com/de5vfgkg4/image/upload/v1703534955/OG_Twitter_uvmjyr.png">
     <meta property="twitter:title" content="GitHub Rewind 2023!">
-    <meta property="og:image" content="https://res.cloudinary.com/de5vfgkg4/image/upload/v1703534955/OG_Twitter_uvmjyr.png">
+    <meta property="og:image"
+        content="https://res.cloudinary.com/de5vfgkg4/image/upload/v1703534955/OG_Twitter_uvmjyr.png">
     <meta property="og:url" content="https://githubrewind.vercel.app">
-    <meta property="twitter:description" content="Reflect on a year of coding achievements, celebrate your milestones and share your accomplishments with the developer community! #githubrewind2023">
-    <meta property="description" content="Reflect on a year of coding achievements, celebrate your milestones and share your accomplishments with the developer community! #githubrewind2023" />
+    <meta property="twitter:description"
+        content="Reflect on a year of coding achievements, celebrate your milestones and share your accomplishments with the developer community! #githubrewind2023">
+    <meta property="description"
+        content="Reflect on a year of coding achievements, celebrate your milestones and share your accomplishments with the developer community! #githubrewind2023" />
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:site" content="@astrodeeptej" />
 
@@ -27,10 +31,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;600&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet" />
-
     <link rel="stylesheet" href="https://res.cloudinary.com/de5vfgkg4/raw/upload/v1703486436/styles_rw4u3z.css">
 </head>
 
@@ -72,7 +76,7 @@
                 <div
                     class=" child-element  child-element delay-1 flex h-4/5 w-2/3 flex-col justify-center rounded-2xl border-2 border-gray-700 bg-gray-50 bg-opacity-30 px-10 text-gray-950 shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:h-full hover:border-yellow-200 hover:bg-gray-950 hover:bg-opacity-60 hover:text-gray-50">
                     <h1 class="mb-4 text-5xl font-semibold">
-                        Back in action,<span class="block"></span>DeeptejD!🔥
+                        Back in action,<span class="block">{{ username }}!🔥</span>
                     </h1>
                     <p class="mb-7 text-3xl font-light">
                         Ready to unfold your GitHub 2023 coding journey?? 💪
@@ -101,7 +105,7 @@
                 <div
                     class=" child-element  z-20 flex h-2/3 w-full flex-grow flex-col justify-center rounded-2xl border-2 border-gray-600 bg-gray-950 bg-opacity-70 px-11 py-6 text-gray-100 shadow-2xl backdrop-blur-2xl transition-all duration-300">
                     <h1 class="mb-3 text-lg font-normal sm:text-3xl lg:text-5xl">
-                        Back in action, DeeptejD! 🔥
+                        Back in action, {{ username }}! 🔥
                     </h1>
                     <p class="mb-5 text-sm font-light sm:text-xl lg:text-3xl">
                         Ready to unfold your GitHub 2023 coding journey?? 💪
@@ -115,7 +119,7 @@
 
         <!-- COMMITS -->
         <div class="snap-item relative flex min-h-full w-full snap-center items-center justify-center bg-cover bg-center"
-            style="background-image: url(https://res.cloudinary.com/de5vfgkg4/image/upload/v1703484637/contrib_drebif.png)">
+            style="background-image: url(https://ghchart.rshah.org/{{ username }})">
             <!-- backdrop blur -->
             <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full backdrop-blur-xl"></div>
 
@@ -126,7 +130,8 @@
                 <div
                     class="child-element flex h-4/5 w-2/3 flex-col justify-center space-y-10 rounded-2xl border-2 border-gray-700 bg-green-700 bg-opacity-30 px-10 text-gray-950 shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:h-full hover:border-green-700 hover:bg-green-700 hover:bg-opacity-60 hover:text-gray-50">
                     <h1 class="text-4xl font-semibold transition-all duration-300">
-                        In 2023 you've unleashed <span id="commitCount">{{ total_commits }}</span> commits into the wild! 🌿
+                        In 2023 you've unleashed <span id="commitCount">{{ total_commits }}</span> commits into the
+                        wild! 🌿
                     </h1>
                     <p class="mb-10 text-xl font-light transition-all duration-300">
                         That's more code than a caffeinated squirrel on rollerblades. Keep
@@ -156,8 +161,7 @@
 
             <!-- mobile -->
             <div class="relative mb-12 flex h-full w-full flex-col items-center justify-center bg-cover bg-center px-11 py-20 xl:hidden scroll-into-view "
-                id="commitMobile"
-                style="background-image: url(https://res.cloudinary.com/de5vfgkg4/image/upload/v1703484637/contrib_drebif.png)">
+                id="commitMobile" style="background-image: url(https://ghchart.rshah.org/{{ username }})">
                 <!-- backdrop blur -->
                 <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full backdrop-blur-xl"></div>
                 <!-- badge -->
@@ -219,16 +223,31 @@
                     class=" child-element  delay-1 z-20 flex h-4/5 w-1/3 items-center justify-center rounded-2xl transition-all duration-500">
                     <div class="ml-4 grid h-full w-full grid-cols-3 grid-rows-4 gap-2">
                         <!-- silver bar -->
-                        <div class="col-span-1 col-start-1 row-span-1 row-start-2 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.1.0|lower }}/{{ top_langs.1.0|lower }}-original.svg" class="w-20 h-20 items-center" alt="{{ top_langs.1.0 }}" /></div>
-                        <div class="col-span-1 row-span-2 row-start-3 cursor-pointer rounded-2xl border-2 border-gray-600 bg-gray-600 bg-gradient-to-b from-gray-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-gray-500" id="silverDesktop"></div>
-                        
+                        <div
+                            class="col-span-1 col-start-1 row-span-1 row-start-2 rounded-lg flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.1.0|lower }}/{{ top_langs.1.0|lower }}-original.svg"
+                                class="w-20 h-20 items-center" alt="{{ top_langs.1.0 }}" />
+                        </div>
+                        <div class="col-span-1 row-span-2 row-start-3 cursor-pointer rounded-2xl border-2 border-gray-600 bg-gray-600 bg-gradient-to-b from-gray-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-gray-500"
+                            id="silverDesktop"></div>
+
                         <!-- golden bar -->
-                        <div class="col-span-1 col-start-2 row-span-1 row-start-1 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.0.0|lower }}/{{ top_langs.0.0|lower }}-original.svg" class="w-20 h-20 items-center" alt="{{ top_langs.0.0 }}" /></div>
-                        <div class="col-span-1 row-span-3 row-start-2 cursor-pointer rounded-2xl border-2 border-yellow-400 bg-yellow-600 bg-gradient-to-b from-yellow-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-yellow-300" id="goldDesktop"></div>
+                        <div
+                            class="col-span-1 col-start-2 row-span-1 row-start-1 rounded-lg flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.0.0|lower }}/{{ top_langs.0.0|lower }}-original.svg"
+                                class="w-20 h-20 items-center" alt="{{ top_langs.0.0 }}" />
+                        </div>
+                        <div class="col-span-1 row-span-3 row-start-2 cursor-pointer rounded-2xl border-2 border-yellow-400 bg-yellow-600 bg-gradient-to-b from-yellow-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-yellow-300"
+                            id="goldDesktop"></div>
 
                         <!-- bronzer bar -->
-                        <div class="col-span-1 col-start-3 row-span-1 row-start-3 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.2.0|lower }}/{{ top_langs.2.0|lower }}-original.svg" class="w-20 h-20 items-center" alt="{{ top_langs.2.0 }}" /></div>
-                        <div class="to col-span-1 row-span-1 row-start-4 cursor-pointer rounded-2xl border-2 border-amber-600 bg-amber-800 bg-gradient-to-b from-amber-600 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-amber-600" id="bronzeDesktop"></div>
+                        <div
+                            class="col-span-1 col-start-3 row-span-1 row-start-3 rounded-lg flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.2.0|lower }}/{{ top_langs.2.0|lower }}-original.svg"
+                                class="w-20 h-20 items-center" alt="{{ top_langs.2.0 }}" />
+                        </div>
+                        <div class="to col-span-1 row-span-1 row-start-4 cursor-pointer rounded-2xl border-2 border-amber-600 bg-amber-800 bg-gradient-to-b from-amber-600 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-amber-600"
+                            id="bronzeDesktop"></div>
                     </div>
                 </div>
             </div>
@@ -241,15 +260,30 @@
                     class=" child-element  rounded-2x z-20 mb-4 flex h-1/2 w-full items-center justify-center overflow-hidden object-cover transition-all duration-300 lg:px-24">
                     <div class="ml-4 grid h-full w-full grid-cols-3 grid-rows-4 gap-2">
                         <!-- silver bar -->
-                        <div class="col-span-1 col-start-1 row-span-1 row-start-2 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.1.0|lower }}/{{ top_langs.1.0|lower }}-original.svg" class="w-10 h-10 items-center" alt="{{ top_langs.1.0 }}" id="second" /></div>
-                        <div class="to col-span-1 row-span-2 row-start-3 rounded-2xl border-2 border-gray-600 bg-gray-600 bg-gradient-to-b from-gray-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-gray-500" id="silverMobile"></div>
+                        <div
+                            class="col-span-1 col-start-1 row-span-1 row-start-2 rounded-lg flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.1.0|lower }}/{{ top_langs.1.0|lower }}-original.svg"
+                                class="w-10 h-10 items-center" alt="{{ top_langs.1.0 }}" id="second" />
+                        </div>
+                        <div class="to col-span-1 row-span-2 row-start-3 rounded-2xl border-2 border-gray-600 bg-gray-600 bg-gradient-to-b from-gray-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-gray-500"
+                            id="silverMobile"></div>
                         <!-- golden bar -->
-                        <div class="col-span-1 col-start-2 row-span-1 row-start-1 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.0.0|lower }}/{{ top_langs.0.0|lower }}-original.svg" class="w-10 h-10 items-center" alt="{{ top_langs.0.0 }}" id="first" /></div>
-                        <div class="to col-span-1 row-span-3 row-start-2 rounded-2xl border-2 border-yellow-400 bg-yellow-600 bg-gradient-to-b from-yellow-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-yellow-300" id="goldMobile"></div>
+                        <div
+                            class="col-span-1 col-start-2 row-span-1 row-start-1 rounded-lg flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.0.0|lower }}/{{ top_langs.0.0|lower }}-original.svg"
+                                class="w-10 h-10 items-center" alt="{{ top_langs.0.0 }}" id="first" />
+                        </div>
+                        <div class="to col-span-1 row-span-3 row-start-2 rounded-2xl border-2 border-yellow-400 bg-yellow-600 bg-gradient-to-b from-yellow-400 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-yellow-300"
+                            id="goldMobile"></div>
 
                         <!-- bronzer bar -->
-                        <div class="col-span-1 col-start-3 row-span-1 row-start-3 rounded-lg flex items-center justify-center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.2.0|lower }}/{{ top_langs.2.0|lower }}-original.svg" class="w-10 h-10 items-center" alt="{{ top_langs.2.0 }}" id="third" /></div>
-                        <div class="to col-span-1 row-span-1 row-start-4 rounded-2xl border-2 border-amber-600 bg-amber-800 bg-gradient-to-b from-amber-600 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-amber-600" id="bronzeMobile"></div>
+                        <div
+                            class="col-span-1 col-start-3 row-span-1 row-start-3 rounded-lg flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ top_langs.2.0|lower }}/{{ top_langs.2.0|lower }}-original.svg"
+                                class="w-10 h-10 items-center" alt="{{ top_langs.2.0 }}" id="third" />
+                        </div>
+                        <div class="to col-span-1 row-span-1 row-start-4 rounded-2xl border-2 border-amber-600 bg-amber-800 bg-gradient-to-b from-amber-600 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-amber-600"
+                            id="bronzeMobile"></div>
                     </div>
                 </div>
                 <div
@@ -281,7 +315,7 @@
                 <div
                     class=" child-element  z-20 flex h-4/5 w-2/3 flex-col justify-center space-y-10 rounded-2xl border-2 border-white bg-gray-100 bg-opacity-10 px-10 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:h-full hover:border-yellow-100 hover:bg-gray-900 hover:bg-opacity-60 hover:text-gray-50">
                     <h1 class="text-4xl font-semibold transition-all duration-300">
-                        You recieved <span id="starCount">{{ starred_repos_count}}</span> stars on your repos in 2023 ✨✨
+                        You recieved <span id="starCount">{{ starred }}</span> stars on your repos in 2023 ✨✨
                     </h1>
                     <p class="mb-10 text-xl font-light transition-all duration-300">
                         Can't wait to see the constellation you build next year! 🤩
@@ -322,7 +356,7 @@
                 <div
                     class=" child-element  delay-1 z-20 flex h-2/3 w-full flex-grow flex-col justify-center rounded-2xl border-2 border-yellow-100 bg-gray-800 bg-opacity-10 px-11 py-6 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300">
                     <h1 class="mb-3 text-lg font-bold sm:text-3xl lg:text-5xl">
-                        You recieved {{ starred_repos_count}} stars on your repos in 2023 ✨✨
+                        You recieved {{ starred }} stars on your repos in 2023 ✨✨
                     </h1>
                     <p class="mb-5 text-sm font-light sm:text-xl lg:text-3xl">
                         Can't wait to see the constellation you build next year! 🤩
@@ -353,7 +387,8 @@
                 <div
                     class=" child-element  z-20 flex h-4/5 w-2/3 flex-col justify-center space-y-10 rounded-2xl border-2 border-white bg-gray-100 bg-opacity-10 px-10 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300 hover:h-full hover:border-yellow-100 hover:bg-gray-900 hover:bg-opacity-60 hover:text-gray-50">
                     <h1 class="text-4xl font-semibold transition-all duration-300">
-                        Fork Yeah! Celebrating <span id="totaldias">{{ totalDays }}</span> Days of Code (and Probably Some Bugs) 👀
+                        Fork Yeah! Celebrating <span id="totaldias">{{ totalDays }}</span> Days of Code (and Probably
+                        Some Bugs) 👀
                     </h1>
                     <p class="mb-10 text-xl font-light transition-all duration-300">
                         You created your account on {{ createdDate }}, was your first code 'Hello World' too? 👀
@@ -405,6 +440,136 @@
             </div>
         </div>
 
+        <!-- DOWNLOAD -->
+        <div class="snap-item flex min-h-full w-full snap-center items-center justify-center">
+            <!-- desktop -->
+            <div class=" scroll-into-view relative mb-16 hidden h-full w-full flex-col items-center space-1-5 bg-cover bg-center px-32 py-36 xl:flex"
+                id="downloadDesktop">
+                <!-- badge -->
+                <div class=" child-element z-20 flex h-4/5 w-full cursor-pointer items-center justify-center rounded-2xl transition-all duration-500 confetti-badge"
+                    >
+                    <div class="w-96 h-96 bg-gradient-to-br  p-4 from-[#3c006a] to-[#000000] rounded-2xl shadow-2xl border-2 border-gray-800 text-white flex flex-col"
+                        onclick="capture()" id="finalbadge">
+                        <!-- profile and username -->
+                        <div class="w-full mb-1 h-2/6 items-center justify-center flex flex-col space-y-1">
+                            <div class="w-20 h-full">
+                                <img src="{{ avatar_url }}" crossorigin="anonymous" alt="Profile Picture"
+                                    class="object-cover rounded-lg border-gray-600 border-2">
+                            </div>
+                            <p
+                                class="text-sm text-center mt-5 text-gray-500">
+                                github.com/{{ username }}</p>
+                        </div>
+                        <div
+                            class="w-full h-1/6 p-2 items-center justify-center flex flex-row divide-x-2 divide-gray-700 space-x-1 text-white">
+                            <div class="w-1/3 text-center h-full">
+                                <p>Commits</p>
+                                <p>{{ total_commits }}</p>
+                            </div>
+                            <div class="w-1/3 text-center h-full">
+                                <p>Stars</p>
+                                <p>{{ starred }}</p>
+                            </div>
+                            <div class="w-1/3 text-center h-full">
+                                <p>Followers</p>
+                                <p>{{ starred }}</p>
+                            </div>
+                        </div>
+                        <div
+                            class="w-full text-xs h-2/6 p-2 items-center justify-center flex flex-row divide-x-2 divide-gray-700 space-x-1 text-white">
+                            <div
+                                class="w-full text-center h-full text-gray-50 flex flex-col space-x-1 p-1 items-center justify-center text-base">
+                                <div>My Top-3 Langs</div>
+                                <div class="flex flex-col space-y-1 items-center justify-center">
+                                    <div>{{ top_langs.0.0 }}</div>
+                                    <div>{{ top_langs.1.0 }}</div>
+                                    <div>{{ top_langs.2.0 }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="w-full text-xs h-1/6 p-2 items-center justify-center flex flex-row divide-x-2 divide-gray-700 space-x-1 text-white">
+                            <div
+                                class="w-full text-center h-full text-gray-500 flex flex-row space-x-1 p-1 items-center justify-center">
+                                <p class="p-1 text-center">Get yours: https://githubrewind.vercel.app</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- message -->
+                <div
+                    class=" child-element delay-1 mt-8 z-20 flex h-1/5 w-full flex-row items-center justify-center rounded-2xl px-10 text-white transition-all duration-300">
+                    <button
+                        class="p-5 rounded-2xl bg-gradient-to-br from-[#b95dff] to-[#210134] border-2 border-[#62298a] text-white text-xl"
+                        onclick="capture()" id="finalbadgedownload">Download Badge</button>
+                </div>
+            </div>
+
+            <!-- mobile -->
+            <div class=" scroll-into-view relative mb-12 flex h-full w-full flex-col items-center justify-center bg-gray-100 bg-cover bg-center px-11 py-20 xl:hidden"
+                id="downloadMobile"
+                style="background-image: url(https://media.giphy.com/media/UsCT2mzipv6I13GD2b/giphy.gif)">
+                <!-- badge -->
+                <div class=" child-element z-20 flex h-4/5 w-full cursor-pointer items-center justify-center rounded-2xl transition-all duration-500 confetti-badge"
+                    >
+                    <div class="w-96 h-96 bg-gradient-to-br  p-4 from-[#3c006a] to-[#000000] rounded-2xl shadow-2xl border-2 border-gray-800 text-white flex flex-col"
+                        id="finalbadgemobile">
+                        <!-- profile and username -->
+                        <div class="w-full mb-1 h-2/6 items-center justify-center flex flex-col space-y-1">
+                            <div class="w-20 h-full">
+                                <img src="{{ avatar_url }}" alt="Profile Picture"
+                                    class="object-cover rounded-lg border-gray-600 border-2">
+                            </div>
+                            <p
+                                class="text-sm text-center mt-5 text-gray-500">
+                                github.com/{{ username }}</p>
+                        </div>
+                        <div
+                            class="w-full h-1/6 p-2 items-center justify-center flex flex-row divide-x-2 divide-gray-700 space-x-1 text-white">
+                            <div class="w-1/3 text-center h-full">
+                                <p>Commits</p>
+                                <p>{{ total_commits }}</p>
+                            </div>
+                            <div class="w-1/3 text-center h-full">
+                                <p>Stars</p>
+                                <p>{{ starred }}</p>
+                            </div>
+                            <div class="w-1/3 text-center h-full">
+                                <p>Followers</p>
+                                <p>{{ starred }}</p>
+                            </div>
+                        </div>
+                        <div
+                            class="w-full text-xs h-2/6 p-2 items-center justify-center flex flex-row divide-x-2 divide-gray-700 space-x-1 text-white">
+                            <div
+                                class="w-full text-center h-full text-gray-50 flex flex-col space-x-1 p-1 items-center justify-center text-base">
+                                <div>My Top-3 Langs</div>
+                                <div class="flex flex-col space-y-1 items-center justify-center">
+                                    <div>{{ top_langs.0.0 }}</div>
+                                    <div>{{ top_langs.1.0 }}</div>
+                                    <div>{{ top_langs.2.0 }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="w-full text-xs h-1/6 p-2 items-center justify-center flex flex-row divide-x-2 divide-gray-700 space-x-1 text-white">
+                            <div
+                                class="w-full text-center h-full text-gray-500 flex flex-row space-x-1 p-1 items-center justify-center">
+                                <p class="p-1 text-center">Get yours: https://githubrewind.vercel.app</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- message -->
+                <div
+                    class=" child-element delay-1 mt-8 z-20 flex h-1/5 w-full flex-row items-center justify-center rounded-2xl px-10 text-white transition-all duration-300">
+                    <button
+                        class="p-5 rounded-2xl bg-gradient-to-br from-[#b95dff] to-[#210134] border-2 border-[#62298a] text-white text-xl"
+                        id="finalbadgedownload" onclick="capturemobile()">Download</button>
+                </div>
+            </div>
+        </div>
+
         <!-- OVERALL -->
         <div class="snap-item flex min-h-full w-full snap-center items-center justify-center">
             <!-- desktop -->
@@ -417,7 +582,8 @@
                         And thats a wrap! 🥹
                     </h1>
                     <p class="mb-10 text-xl font-light transition-all duration-300">
-                        We shall meet again, with yet another Rewind in 2024! Till then keep coding & keep building cool stuff! 💪
+                        We shall meet again, with yet another Rewind in 2024! Till then keep coding & keep building cool
+                        stuff! 💪
                     </p>
                     <div class="flex flex-row space-x-2">
                         <div
@@ -453,7 +619,8 @@
                         And thats a wrap! 🥹
                     </h1>
                     <p class="mb-5 text-sm font-light sm:text-xl lg:text-3xl">
-                        We shall meet again, with yet another Rewind in 2024! Till then keep coding & keep building cool stuff! 💪
+                        We shall meet again, with yet another Rewind in 2024! Till then keep coding & keep building cool
+                        stuff! 💪
                     </p>
                     <div class="flex flex-row space-x-2 items-center justify-center">
                         <div
@@ -466,7 +633,7 @@
             </div>
         </div>
 
-                <!-- FINAL -->
+        <!-- FINAL -->
         <div class="snap-item flex min-h-full w-full snap-center items-center justify-center">
             <!-- desktop -->
             <div class=" scroll-into-view relative mb-16 hidden h-full w-full flex-row items-center space-x-5 bg-cover bg-center px-32 py-36 xl:flex"
@@ -483,17 +650,24 @@
 
                         Thanks for making 2023 special!
                     </p>
+                    <p class="text-sm text-gray-600">Not affiliated with GitHub</p>
                     <div class="flex flex-row space-x-2">
-                        <iframe src="https://github.com/sponsors/DeeptejD/button" title="Sponsor DeeptejD" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
-                        <a href="https://github.com/" target="_blank"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/DeeptejD/demo"></a>
-                        <a href="https://github.com/DeeptejD" target="_blank"><img alt="GitHub followers" src="https://img.shields.io/github/followers/DeeptejD"></a>
-                        <a href="https://linkedin.com/in/DeeptejDhauskar" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Linkedin" ></a>
+                        <iframe src="https://github.com/sponsors/DeeptejD/button" title="Sponsor DeeptejD" height="32"
+                            width="114" style="border: 0; border-radius: 6px;"></iframe>
+                        <a href="https://github.com/deeptejd/GithubRewind2023" target="_blank"><img alt="GitHub Repo stars"
+                                src="https://img.shields.io/github/stars/DeeptejD/GithubRewind2023"></a>
+                        <a href="https://github.com/DeeptejD" target="_blank"><img alt="GitHub followers"
+                                src="https://img.shields.io/github/followers/DeeptejD"></a>
+                        <a href="https://linkedin.com/in/DeeptejDhauskar" target="_blank"><img
+                                src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"
+                                alt="Linkedin"></a>
                     </div>
                 </div>
                 <!-- badge -->
                 <div class=" child-element  delay-1 z-20 flex h-full w-1/3 cursor-pointer items-center justify-center rounded-2xl transition-all duration-500 confetti-badge"
                     id="confetti-badge3">
-                        <iframe src="https://github.com/sponsors/DeeptejD/card" title="Sponsor DeeptejD" height="225" width="600" style="border: 0;" style="animation: teeter 1.5s ease-in-out infinite"></iframe>
+                    <iframe src="https://github.com/sponsors/DeeptejD/card" title="Sponsor DeeptejD" height="225"
+                        width="600" style="border: 0;" style="animation: teeter 1.5s ease-in-out infinite"></iframe>
                 </div>
             </div>
 
@@ -516,10 +690,17 @@
                         Thanks for making 2023 special!
                     </p>
                     <div class="flex flex-col space-y-2 items-center justify-center">
-                        <iframe src="https://github.com/sponsors/DeeptejD/button" title="Sponsor DeeptejD" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
-                        <div class="flex flex-row space-x-2">                        <a href="https://github.com/DeeptejD/GithubRewind2023" target="_blank"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/DeeptejD/GithubRewind2023"></a>
-                        <a href="https://github.com/DeeptejD" target="_blank"><img alt="GitHub followers" src="https://img.shields.io/github/followers/DeeptejD"></a></div>
-                        <a href="https://linkedin.com/in/DeeptejDhauskar" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Linkedin" ></a>    
+                        <iframe src="https://github.com/sponsors/DeeptejD/button" title="Sponsor DeeptejD" height="32"
+                            width="114" style="border: 0; border-radius: 6px;"></iframe>
+                        <div class="flex flex-row space-x-2"> <a href="https://github.com/DeeptejD/GithubRewind2023"
+                                target="_blank"><img alt="GitHub Repo stars"
+                                    src="https://img.shields.io/github/stars/DeeptejD/GithubRewind2023"></a>
+                            <a href="https://github.com/DeeptejD" target="_blank"><img alt="GitHub followers"
+                                    src="https://img.shields.io/github/followers/DeeptejD"></a>
+                        </div>
+                        <a href="https://linkedin.com/in/DeeptejDhauskar" target="_blank"><img
+                                src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"
+                                alt="Linkedin"></a>
                     </div>
                 </div>
             </div>
@@ -528,7 +709,40 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.2/tsparticles.confetti.bundle.min.js"></script>
-    <script src="https://res.cloudinary.com/de5vfgkg4/raw/upload/v1703532993/app_srzbtm.js"></script>
+    <script src="https://res.cloudinary.com/de5vfgkg4/raw/upload/v1703593955/app_nkdfcd.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        function capture() {
+            const tobedownloaded = document.getElementById("finalbadge");
+
+            html2canvas(tobedownloaded, {
+                useCORS: true,
+            }).then(function (canvas) {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'Github_Rewind_2023.png';
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+        }
+                function capturemobile() {
+            const tobedownloaded = document.getElementById("finalbadgemobile");
+
+            html2canvas(tobedownloaded, {
+                useCORS: true,
+            }).then(function (canvas) {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'Github_Rewind_2023.png';
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+        }
+    </script>
 </body>
 
 </html>

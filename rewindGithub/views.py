@@ -16,6 +16,7 @@ def authenticate(request):
     
     # this makes a request using the client ID to the github oauth url
     return HttpResponseRedirect(github_oauth_url)
+    # return HttpResponseRedirect('/callback')
 
 # called for URL /callback this is the one that returns the actual stuff that gets displayed on the callback template
 def callback(request):

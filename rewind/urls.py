@@ -24,5 +24,5 @@ urlpatterns = [
     path('', home_page, name='home'),
     path('authenticate/', authenticate, name='authenticate'),
     path('callback/', callback, name='callback'),
-    path('revoked/', revoked_view, name='revoked')
+    path('revoked/', revoked_view, name='revoked'),
 ]
