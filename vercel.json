@@ -12,10 +12,5 @@
       "src": "/(.*)",
       "dest": "rewind/wsgi.py"
     }
-  ],
-  "install": [
-    {
-      "include": ["requirements.txt"]
-    }
   ]
 }
